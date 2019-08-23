@@ -1,28 +1,33 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Header v-bind:userProfile="userProfile" />
+    <div class="container">
+      <NetworkSettings title="Network settings" />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import NetworkSettings from './components/NetworkSettings.vue';
+import Header from './containers/Header.vue';
 
 export default {
   name: 'app',
+  data: function () {
+    return {
+      userProfile: {
+        userId: '100',
+        userName: 'admin',
+        sessionId: 'demo',
+        language: 'en'
+      }
+    }
+  },
   components: {
-    HelloWorld
+    Header,
+    NetworkSettings
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style lang="scss" src="@/styles/index.scss"></style>
