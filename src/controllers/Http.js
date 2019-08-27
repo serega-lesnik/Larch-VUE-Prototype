@@ -1,7 +1,14 @@
 import Axios from 'axios';
 import { xml2json } from '@/utils/xmlUtils';
 
-const API_SERVICE_URL = 'http://192.168.21.136/hpe/';
+const getAddress = () => {
+	let url = '';
+	if (process.env.NODE_ENV === 'development') {
+		url += process.env.VUE_APP_API_SERVICE_URL;
+	}
+	url += `${process.env.VUE_APP_API_SERVICE_PREFIX}/`;
+	return url;
+}
 
 const getOptions = () => {
 	const options = {
@@ -43,7 +50,7 @@ class Http {
 	static get = (sections, param) => {
 		const url = getUrl(sections);
 		const query = param || ''; // TODO: QueryString.encode(param)
-		const path = `${API_SERVICE_URL}${url}${query}`
+		const path = `${getAddress()}${url}${query}`
 		const options = getOptions();
 
 		const watcher = new Promise((resolve, reject) => {
